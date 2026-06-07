@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading in Stock Market | Curso de Opciones con Antonio Iskandar</title>
+<meta name="description" content="Aprende a operar acciones y opciones con un método profesional y una sala de trading en vivo. 21 años de experiencia, 5.000+ alumnos en 25 países. Curso de Opciones de Trading in Stock Market.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Brand palette sourced from the TSM logo + live tradinginstockmarket.com CSS:
+   azure #2ea3f2, bull-arrow green #2fb86e, flag red #e0413a, charcoal skyline navy.
+   Dark hero is a deliberate conversion-oriented elevation; all colors come from their brand. */
+:root {
+  --bg: #0a1825;
+  --bg-2: #0f2233;
+  --bg-3: #07131d;
+  --text: #ffffff;
+  --text-muted: #b4c6d6;
+  --text-dim: #6f93ad;
+  --accent: #2ea3f2;
+  --accent-2: #56b6f6;
+  --green: #2fb86e;
+  --red: #e0413a;
+  --border: rgba(86, 182, 246, 0.18);
+  --card: rgba(15, 34, 51, 0.65);
+  --radius: 14px;
+  --max: 1180px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 17px;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; line-height: 1.18; letter-spacing: -0.01em; }
+a { color: var(--accent-2); text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+.container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #06131f;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  padding: 18px 36px;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(46, 163, 242, 0.35);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn:hover { background: var(--accent-2); transform: translateY(-2px); box-shadow: 0 16px 36px rgba(46, 163, 242, 0.5); }
+.btn.lg { padding: 22px 44px; font-size: 20px; }
+.btn.green { background: var(--green); color: #04150c; box-shadow: 0 10px 30px rgba(47, 184, 110, 0.35); }
+.btn.green:hover { background: #38cf7c; box-shadow: 0 16px 36px rgba(47, 184, 110, 0.5); }
+
+/* nav */
+nav.top {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(7, 19, 29, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+nav.top .row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; min-height: 56px; }
+nav.top .logo { height: 38px; width: auto; }
+nav .btn { padding: 12px 22px; font-size: 14px; }
+
+/* hero */
+section.hero {
+  padding: 56px 0 48px;
+  background: radial-gradient(1200px 600px at 50% -10%, rgba(46, 163, 242, 0.25), transparent 60%), var(--bg);
+  text-align: center;
+}
+.eyebrow {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  background: rgba(46, 163, 242, 0.15);
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-size: clamp(26px, 4.2vw, 46px);
+  font-weight: 900;
+  max-width: 920px;
+  margin: 0 auto 16px;
+  line-height: 1.15;
+}
+.hero h1 .hl { color: var(--accent-2); }
+.hero p.sub {
+  font-size: clamp(15px, 1.6vw, 18px);
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto 18px;
+}
+.hero .trust-row { margin-bottom: 20px; }
+.trust-row { display: flex; gap: 26px; justify-content: center; flex-wrap: wrap; color: var(--text-dim); font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+.trust-row span { display: flex; align-items: center; gap: 8px; }
+.trust-row .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
+
+/* vsl placeholder */
+.vsl-wrap { max-width: 820px; margin: 0 auto; }
+.vsl-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background: linear-gradient(135deg, var(--bg-3), #0a1622);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(46, 163, 242, 0.28);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+.vsl-frame::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(400px 200px at 50% 50%, rgba(46, 163, 242, 0.18), transparent 70%);
+  pointer-events: none;
+}
+.vsl-play {
+  width: 84px; height: 84px;
+  border-radius: 50%;
+  background: rgba(46, 163, 242, 0.18);
+  border: 2px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  position: relative; z-index: 1;
+  box-shadow: 0 0 0 8px rgba(46, 163, 242, 0.08);
+  transition: transform .25s ease, background .25s ease;
+}
+.vsl-play svg { width: 34px; height: 34px; fill: var(--accent); margin-left: 6px; }
+.vsl-frame:hover .vsl-play { transform: scale(1.05); background: rgba(46, 163, 242, 0.28); }
+.vsl-label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  position: relative; z-index: 1;
+  margin-bottom: 6px;
+}
+.vsl-sub {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative; z-index: 1;
+}
+.hero-cta-row { display: flex; justify-content: center; margin-top: 22px; }
+
+/* shared section */
+section { padding: 92px 0; }
+section.alt { background: var(--bg-3); }
+section h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 18px;
+}
+section .lede {
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 740px;
+  margin: 0 auto 52px;
+  font-size: 19px;
+}
+
+/* problem agitation */
+.pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+.pain {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: var(--radius);
+  padding: 28px;
+  font-size: 17px;
+}
+.pain b { color: var(--accent-2); font-family: 'Poppins', sans-serif; font-weight: 700; }
+
+/* solution / mechanism */
+.mech { max-width: 980px; margin: 0 auto; }
+.mech-intro { font-size: 20px; color: var(--text-muted); text-align: center; margin-bottom: 50px; }
+.signals { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+.signal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 34px 26px;
+  position: relative;
+}
+.signal .num {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 52px;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.signal h3 { font-size: 21px; margin-bottom: 12px; }
+.signal p { color: var(--text-muted); }
+
+/* social proof */
+.proof-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; max-width: 920px; margin: 0 auto 28px; }
+.proof-stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 30px 22px;
+  text-align: center;
+}
+.proof-stat .n { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 38px; color: var(--green); line-height: 1; margin-bottom: 8px; }
+.proof-stat .l { color: var(--text-muted); font-size: 15px; }
+.proof-note { text-align: center; color: var(--text-dim); font-size: 14px; max-width: 640px; margin: 0 auto; }
+
+/* lead magnet */
+.lm-card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(46, 163, 242, 0.18), rgba(47, 184, 110, 0.08));
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  padding: 54px 40px;
+  text-align: center;
+}
+.lm-card h3 { font-size: clamp(24px, 3vw, 34px); margin-bottom: 16px; }
+.lm-card p { color: var(--text-muted); margin-bottom: 28px; }
+.lm-form { display: flex; gap: 12px; max-width: 520px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+.lm-form input {
+  flex: 1 1 200px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(7, 19, 29, 0.6);
+  color: var(--text);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+.lm-form input::placeholder { color: var(--text-dim); }
+
+/* offer */
+.offer-card {
+  max-width: 820px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 54px 40px;
+}
+.offer-card h3 { font-size: 30px; text-align: center; margin-bottom: 6px; }
+.offer-card .price { text-align: center; font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 46px; color: var(--accent-2); margin-bottom: 8px; }
+.offer-card .subline { text-align: center; color: var(--text-muted); margin-bottom: 34px; }
+.offer-card ul { list-style: none; padding: 0; max-width: 580px; margin: 0 auto 36px; }
+.offer-card li { padding: 14px 0 14px 32px; border-bottom: 1px solid var(--border); position: relative; }
+.offer-card li:last-child { border-bottom: 0; }
+.offer-card li:before {
+  content: ""; position: absolute; left: 0; top: 22px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 0 4px rgba(47, 184, 110, 0.18);
+}
+.offer-card .cta-wrap { text-align: center; }
+
+/* authority */
+.auth-row { display: grid; grid-template-columns: 1fr 1.2fr; gap: 52px; align-items: center; max-width: 1080px; margin: 0 auto; }
+.auth-photo { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 18px; }
+.auth-photo img { border-radius: 14px; width: 100%; }
+.auth-row .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 22px; }
+.stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.stat .n { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 28px; color: var(--accent-2); line-height: 1; margin-bottom: 6px; }
+.stat .l { color: var(--text-muted); font-size: 14px; }
+.auth-row p { color: var(--text-muted); margin-bottom: 16px; font-size: 17px; }
+
+/* final cta */
+section.final { background: linear-gradient(135deg, var(--bg-3), var(--bg-2)); text-align: center; }
+section.final h2 { max-width: 880px; margin: 0 auto 20px; }
+section.final p.sub { color: var(--text-muted); max-width: 700px; margin: 0 auto 36px; font-size: 19px; }
+
+/* faq */
+.faq { max-width: 820px; margin: 0 auto; }
+.q { border: 1px solid var(--border); background: var(--card); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; }
+.q summary {
+  cursor: pointer; list-style: none; padding: 22px 28px;
+  font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 18px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.q summary::-webkit-details-marker { display: none; }
+.q summary::after { content: "+"; font-size: 24px; color: var(--accent-2); transition: transform .25s ease; }
+.q[open] summary::after { transform: rotate(45deg); }
+.q .a { padding: 0 28px 24px; color: var(--text-muted); }
+
+/* footer */
+footer { padding: 40px 0; border-top: 1px solid var(--border); color: var(--text-dim); text-align: center; font-size: 14px; }
+footer p { margin: 6px 0; }
+
+/* scroll reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 720px) {
+  section.hero { padding: 32px 0 24px; }
+  section { padding: 60px 0; }
+  .auth-row { grid-template-columns: 1fr; gap: 32px; }
+  .lm-card, .offer-card { padding: 38px 22px; }
+  nav.top .logo { height: 32px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container row">
+    <img class="logo" src="https://promo.tradinginstockmarket.com/wp-content/uploads/2023/05/tsm-cmyk-flag.png" alt="Trading in Stock Market">
+    <a href="#oferta" class="btn">Quiero Inscribirme</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Curso de Opciones · Trading en Español</span>
+    <h1>Opera opciones con un <span class="hl">método profesional</span> y una sala en vivo</h1>
+    <p class="sub">Un sistema paso a paso, no señales sueltas ni operar por impulso.</p>
+    <div class="trust-row">
+      <span><span class="dot"></span>21 años de experiencia</span>
+      <span><span class="dot"></span>5.000+ alumnos</span>
+      <span><span class="dot"></span>25+ países</span>
+    </div>
+    <div class="vsl-wrap">
+      <div class="vsl-frame">
+        <div class="vsl-play">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="vsl-label">Tu VSL va aquí</div>
+        <div class="vsl-sub">Paso 1: activa el sonido del video</div>
+      </div>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#oferta" class="btn lg">Quiero formarme con TSM</a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <h2 class="reveal">Si esto te suena, sigue leyendo</h2>
+    <p class="lede reveal">La mayoría no pierde por falta de inteligencia. Pierde por una de estas cinco razones.</p>
+    <div class="pain-grid">
+      <div class="pain reveal"><b>Operas por impulso.</b> Entras porque el gráfico se ve bien y sales en cuanto aparece el miedo. Cada operación es una apuesta.</div>
+      <div class="pain reveal"><b>Información dispersa.</b> Vídeos sueltos, señales de desconocidos, mil indicadores. Nadie te ordena un método claro.</div>
+      <div class="pain reveal"><b>Ya perdiste dinero solo.</b> Probaste por tu cuenta, no salió y empezaste a dudar de si el trading es para ti.</div>
+      <div class="pain reveal"><b>Te falta criterio, no indicadores.</b> No necesitas otra flecha en la pantalla. Necesitas saber por qué entras y por qué sales.</div>
+      <div class="pain reveal"><b>Tienes trabajo y poco tiempo.</b> No puedes mirar la pantalla todo el día ni permitirte operaciones que solo cuestan dinero.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container mech">
+    <h2 class="reveal">El método de Trading in Stock Market</h2>
+    <p class="mech-intro reveal">El mercado no premia la suerte, premia el método. El Curso de Opciones de TSM te lleva paso a paso, desde lo básico hasta las estrategias avanzadas, y lo aplicas desde la primera sesión en una sala en vivo. Estos son los tres bloques del sistema.</p>
+    <div class="signals">
+      <div class="signal reveal">
+        <div class="num">01</div>
+        <h3>Bases sólidas</h3>
+        <p>Análisis técnico y fundamental. Aprendes a leer el mercado y a elegir qué operar con criterio, no por corazonadas.</p>
+      </div>
+      <div class="signal reveal">
+        <div class="num">02</div>
+        <h3>Opciones de verdad</h3>
+        <p>Fundamentos de opciones y estrategias reales: spreads, iron condors y butterflies. Sabes qué usar según se mueva el mercado.</p>
+      </div>
+      <div class="signal reveal">
+        <div class="num">03</div>
+        <h3>Sala en vivo</h3>
+        <p>Casos prácticos cada día y acceso a la sala de trading durante 3 meses. Aprendes, preguntas y operas acompañado, no solo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <h2 class="reveal">Una academia con recorrido real</h2>
+    <p class="lede reveal">No son promesas. Son los números de Trading in Stock Market después de 9 años formando traders.</p>
+    <div class="proof-stats">
+      <div class="proof-stat reveal"><div class="n">5.000+</div><div class="l">Alumnos formados</div></div>
+      <div class="proof-stat reveal"><div class="n">25+</div><div class="l">Países</div></div>
+      <div class="proof-stat reveal"><div class="n">21</div><div class="l">Años operando</div></div>
+      <div class="proof-stat reveal"><div class="n">9</div><div class="l">Años de academia</div></div>
+    </div>
+    <!-- Hay testimonios con nombre y resultado dentro de la comunidad de Skool que aún no aparecen en el funnel.
+         Insertar 3-6 testimonios reales (nombre + cita textual) en cards aquí para reforzar la prueba social.
+         No se inventan testimonios: este bloque usa solo cifras agregadas reales hasta tener las citas. -->
+    <p class="proof-note reveal">Más de 5.000 personas en 25 países ya aprendieron este método. Los testimonios con nombre de la comunidad se añaden aquí.</p>
+  </div>
+</section>
+
+<!-- LEAD MAGNET - INFERRED. No se encontró un imán de leads gratuito en el sitio del prospecto.
+     Confirmar con Antonio antes de promocionar. Sustituir por su clase/recurso gratuito real si existe. -->
+<section>
+  <div class="container">
+    <div class="lm-card reveal">
+      <h3>¿Aún no listo para el curso completo?</h3>
+      <p>Empieza con la clase gratuita: las 3 estrategias de opciones que un trader profesional usa según suba, baje o se quede quieto el mercado. Déjanos tu correo y te la enviamos.</p>
+      <form class="lm-form" onsubmit="return false;">
+        <input type="text" name="nombre" placeholder="Tu nombre" aria-label="Tu nombre">
+        <input type="email" name="email" placeholder="Tu correo" aria-label="Tu correo">
+        <button type="submit" class="btn">Enviar la clase gratis</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="oferta">
+  <div class="container">
+    <h2 class="reveal">El Paquete de Formación: Curso de Opciones</h2>
+    <p class="lede reveal">Todo lo que necesitas para operar opciones con método y acompañamiento en vivo.</p>
+    <div class="offer-card reveal">
+      <h3>Curso de Opciones</h3>
+      <div class="price">$459</div>
+      <p class="subline">Formación completa: del fundamento a las estrategias avanzadas.</p>
+      <ul>
+        <li>6 sesiones de nivel intermedio (24 horas en vivo)</li>
+        <li>6 sesiones de nivel avanzado</li>
+        <li>Acceso a la sala de trading y al campus durante 3 meses</li>
+        <li>1.500+ horas de material grabado</li>
+        <li>100+ horas en vivo de comunidad y práctica</li>
+        <li>Estrategias reales: spreads, iron condors y butterflies</li>
+      </ul>
+      <div class="cta-wrap">
+        <a href="https://wa.me/96176126178" class="btn lg green" target="_blank" rel="noopener">Reservar mi lugar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="reveal">Quién te va a enseñar</h2>
+    <div class="auth-row" style="margin-top:40px;">
+      <div class="auth-photo reveal">
+        <img src="https://promo.tradinginstockmarket.com/wp-content/uploads/2023/03/Antonio-Iskandar-removebg-preview.png" alt="Antonio Iskandar, instructor de Trading in Stock Market">
+      </div>
+      <div class="reveal">
+        <p>Antonio Iskandar lleva 21 años operando los mercados. Es ingeniero con posgrados en finanzas y dejó una carrera corporativa de 20 años para vivir del trading y ganar tiempo con su familia.</p>
+        <p>Hoy enseña el mismo método que usa cada día con acciones y opciones, especializado en swing trading. No es un gurú de internet. Es un operador real que te acompaña mientras aprendes.</p>
+        <div class="stats">
+          <div class="stat"><div class="n">21</div><div class="l">Años operando</div></div>
+          <div class="stat"><div class="n">5.000+</div><div class="l">Alumnos formados</div></div>
+          <div class="stat"><div class="n">25+</div><div class="l">Países</div></div>
+          <div class="stat"><div class="n">9</div><div class="l">Años de academia</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="container">
+    <h2 class="reveal">Da el paso y fórmate para operar con criterio</h2>
+    <p class="sub reveal">Peor que invertir en formarte es seguir perdiendo solo. Reserva tu lugar en el próximo grupo y empieza a operar acompañado desde la primera sesión.</p>
+    <a href="https://wa.me/96176126178" class="btn lg green" target="_blank" rel="noopener">Reservar mi lugar por WhatsApp</a>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <h2 class="reveal">Preguntas frecuentes</h2>
+    <div class="faq" style="margin-top:40px;">
+      <details class="q reveal"><summary>No tengo experiencia. ¿Puedo empezar?</summary><div class="a">Sí. El curso va por niveles, de los fundamentos a las estrategias avanzadas. Empiezas por las bases y avanzas paso a paso con acompañamiento en vivo.</div></details>
+      <details class="q reveal"><summary>Ya probé el trading y perdí dinero. ¿En qué cambia esto?</summary><div class="a">Casi nadie pierde por falta de capacidad. Pierde por operar sin método y sin nadie que le corrija en vivo. Aquí operas guiado desde el primer día, con un sistema claro.</div></details>
+      <details class="q reveal"><summary>¿Cuánto tiempo necesito al día?</summary><div class="a">El swing trading se opera en minutos, no en horas pegado a la pantalla. Está pensado para personas con trabajo que quieren hacer crecer su capital con calma.</div></details>
+      <details class="q reveal"><summary>¿Qué incluye el precio de $459?</summary><div class="a">6 sesiones intermedio (24 horas), 6 sesiones avanzado, sala de trading y campus por 3 meses, 1.500+ horas grabadas y 100+ horas en vivo.</div></details>
+      <details class="q reveal"><summary>¿Funciona desde mi país?</summary><div class="a">Sí. Hay alumnos en más de 25 países operando los mismos mercados. Todo es online, en vivo y grabado.</div></details>
+      <details class="q reveal"><summary>¿Cómo me inscribo?</summary><div class="a">Escríbenos por WhatsApp y te explicamos las fechas del próximo grupo y cómo reservar tu lugar.</div></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Trading in Stock Market · Antonio Iskandar</p>
+    <p>Operar en los mercados conlleva riesgo. La formación no garantiza resultados.</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
